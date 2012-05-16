@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>client min private twitter</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style>
+            li{
+                margin-bottom: 4px;
+                background: #f2f5f6; /* Old browsers */
+                background: -moz-linear-gradient(top, #f2f5f6 0%, #e3eaed 37%, #c8d7dc 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f5f6), color-stop(37%,#e3eaed), color-stop(100%,#c8d7dc)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* IE10+ */
+                background: linear-gradient(top, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=0 ); /* IE6-9 */
+            }
+
+            .my-button{
+                display: inline-block;
+                margin-left: 2px;
+
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 14px;
+                color: #ffffff;
+                padding: 6px 16px;
+                background: -moz-linear-gradient(
+                    top,
+                    #8fadc4 0%,
+                    #1a708f 50%,
+                    #142a85 50%,
+                    #203e6b);
+                background: -webkit-gradient(
+                    linear, left top, left bottom, 
+                    from(#8fadc4),
+                    color-stop(0.50, #1a708f),
+                    color-stop(0.50, #142a85),
+                    to(#203e6b));
+                border-radius: 9px;
+                -moz-border-radius: 9px;
+                -webkit-border-radius: 9px;
+                border: 1px solid #3c78a6;
+                -moz-box-shadow:
+                    0px 1px 3px rgba(30,60,150,0.5),
+                    inset 0px 0px 1px rgba(255,255,255,0.6);
+                -webkit-box-shadow:
+                    0px 1px 3px rgba(30,60,150,0.5),
+                    inset 0px 0px 1px rgba(255,255,255,0.6);
+                text-shadow:
+                    0px -1px 0px rgba(15,49,150,1),
+                    0px 1px 0px rgba(255,255,255,0.2);
+
+            }
+            
+            .my-button-save{
+                display: none;
+                 
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>Insert twitt</h1>
+        <form>
+            Twitt:<input id="twitt-text" type="text" value="" placeholder="insert twitt" />
+            <input type="submit" value="post twitt"/>
+        </form>
+        <h1>Twitt List</h1>
+        <ul>
+            
+        </ul>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('form').on('submit',function(){ 
+                    var str='<li>'+
+                            '<div class="my-text">'+$('#twitt-text').val()+'</div>';
+                    if(window.navigator){
+                        navigator.geolocation.getCurrentPosition(function(position) {   
+                            str+=' latitude:'+startPos.coords.latitude+' longitude:'+startPos.coords.longitude;
+                        });
+                    }
+                    str+='<div class="my-button my-button-edit">edit</div>'+
+                         '<div class="my-button my-button-delete">delete</div>'+
+                         '<div class="my-button my-button-save">save</div>'+
+                         '</li>';
+                    $('ul').append(str);
+                    return false;
+                });
+                $('.my-button-edit').live('click',function(){
+                    $(this).parent().find('.my-button-save').css('display','inline-block');
+                    var myText=$(this).parent().find('.my-text');
+                    myText.html('<textarea>'+myText.html()+'</textarea>');
+                    return false;
+                });
+                $('.my-button-save').live('click',function(){
+                    var myText=$(this).parent().find('textarea');
+                    myText.html(myText.html());
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

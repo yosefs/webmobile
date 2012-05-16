@@ -6,11 +6,14 @@
         <style>
             body{
                 color:#1c4476;
+                background-color: #032e3b;
             }
             textarea{
                 width: 95%;
             }
-            
+            h1,h2{
+                color:white;
+            }
             ul{
                 padding: 0;
                 list-style: none;
@@ -22,19 +25,7 @@
             li{
                 padding: 4px;
                 margin-bottom: 14px;
-                background: #f2f5f6; /* Old browsers */
-                background-image: linear-gradient(bottom, rgb(181,193,255) 100%, rgb(217,237,247) 100%);
-                background-image: -o-linear-gradient(bottom, rgb(181,193,255) 100%, rgb(217,237,247) 100%);
-                background-image: -moz-linear-gradient(bottom, rgb(181,193,255) 100%, rgb(217,237,247) 100%);
-                background-image: -webkit-linear-gradient(bottom, rgb(181,193,255) 100%, rgb(217,237,247) 100%);
-                background-image: -ms-linear-gradient(bottom, rgb(181,193,255) 100%, rgb(217,237,247) 100%);         
-                background-image: -webkit-gradient(
-                    linear,
-                    left bottom,
-                    left top,
-                    color-stop(1, rgb(181,193,255)),
-                    color-stop(1, rgb(217,237,247))
-                    );
+               background-color: white;
             }
 
             .my-button{
@@ -81,8 +72,9 @@
         </style>
     </head>
     <body>
+        
         <h1>Personal Remarker</h1>
-            <textarea rows="4" cols="50" id="remark-text" placeholder="insert remark">  </textarea>
+            <textarea rows="4" cols="50" id="remark-text" placeholder="Write your remark..."></textarea>
             <div class="my-button my-button-submit">post remark</div>
         <h2>remarks</h2>
         <ul>
@@ -94,10 +86,10 @@
                 $('.my-button-submit').on('click',function(){ 
                     var date=new Date();
                     var strDate='posted:'+date.getDay()+'/'+date.getMonth()+'/'+date.getFullYear();
-                    var valElement=$('#remark-text').text();
+                    var valElement=$('#remark-text').val();
                     if(!valElement){return false;}
                     var str='<li>'+
-                            '<div class="my-text">'+$('#remark-text').val()+'</div>';
+                            '<div class="my-text">'+valElement+'</div>';
                  /**   if(window.navigator){
                         navigator.geolocation.getCurrentPosition(function(position) {   
                             str+=' latitude:'+startPos.coords.latitude+' longitude:'+startPos.coords.longitude;

@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>client min private twitter</title>
+        <title>Remarker</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <style>
+            body{
+                color:#1c4476;
+            }
+            textarea{
+                width: 100%;
+            }
+            input[type=text]{
+                width:65%;
+            }
             ul{
+                padding: 0;
                 list-style: none;
             }
             
             
             li{
-                margin-bottom: 4px;
+                height: 100%;
+                margin-bottom: 14px;
                 background: #f2f5f6; /* Old browsers */
                 background: -moz-linear-gradient(top, #f2f5f6 0%, #e3eaed 37%, #c8d7dc 100%); /* FF3.6+ */
                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f5f6), color-stop(37%,#e3eaed), color-stop(100%,#c8d7dc)); /* Chrome,Safari4+ */
@@ -65,12 +76,12 @@
         </style>
     </head>
     <body>
-        <h1>Insert twitt</h1>
+        <h1>Remarker</h1>
         <form>
-            Twitt:<input id="twitt-text" type="text" value="" placeholder="insert twitt" />
-            <input type="submit" value="post twitt"/>
+            remark:<input id="remark-text" type="text" value="" placeholder="insert remark" />
+            <input type="submit" value="post remark"/>
         </form>
-        <h1>Twitt List</h1>
+        <h1>remark list</h1>
         <ul>
             
         </ul>
@@ -78,8 +89,12 @@
         <script>
             $(document).ready(function(){
                 $('form').on('submit',function(){ 
+                    var date=new Date();
+                    var strDate='posted:'+date.getDay()+'/'+date.getMonth()+'/'+date.getFullYear();
+                    var valElement=$('#remark-text').val();
+                    if(!valElement){return false;}
                     var str='<li>'+
-                            '<div class="my-text">'+$('#twitt-text').val()+'</div>';
+                            '<div class="my-text">'+$('#remark-text').val()+'</div>';
                  /**   if(window.navigator){
                         navigator.geolocation.getCurrentPosition(function(position) {   
                             str+=' latitude:'+startPos.coords.latitude+' longitude:'+startPos.coords.longitude;
@@ -89,7 +104,7 @@
                     str+='<div class="my-button my-button-edit">edit</div>'+
                          '<div class="my-button my-button-delete">delete</div>'+
                          '<div class="my-button my-button-save">save</div>'+
-                         '<div class="my-remark-date">'+new Date()+'</div>'+
+                         '<div class="my-remark-date">'+strDate+'</div>'+
                          '</li>';
                     $('ul').append(str);
                     return false;

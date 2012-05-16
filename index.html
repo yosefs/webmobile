@@ -4,6 +4,11 @@
         <title>client min private twitter</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <style>
+            ul{
+                list-style: none;
+            }
+            
+            
             li{
                 margin-bottom: 4px;
                 background: #f2f5f6; /* Old browsers */
@@ -69,20 +74,22 @@
         <ul>
             
         </ul>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script>
             $(document).ready(function(){
                 $('form').on('submit',function(){ 
                     var str='<li>'+
                             '<div class="my-text">'+$('#twitt-text').val()+'</div>';
-                    if(window.navigator){
+                 /**   if(window.navigator){
                         navigator.geolocation.getCurrentPosition(function(position) {   
                             str+=' latitude:'+startPos.coords.latitude+' longitude:'+startPos.coords.longitude;
                         });
                     }
+                    */
                     str+='<div class="my-button my-button-edit">edit</div>'+
                          '<div class="my-button my-button-delete">delete</div>'+
                          '<div class="my-button my-button-save">save</div>'+
+                         '<div class="my-remark-date">'+new Date()+'</div>'+
                          '</li>';
                     $('ul').append(str);
                     return false;
@@ -95,7 +102,11 @@
                 });
                 $('.my-button-save').live('click',function(){
                     var myText=$(this).parent().find('textarea');
-                    myText.html(myText.html());
+                    myText.parent().html(myText.val());
+                    return false;
+                });
+                $('.my-button-delete').live('click',function(){
+                    $(this).parent().remove();
                     return false;
                 });
             });

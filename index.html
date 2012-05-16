@@ -8,28 +8,33 @@
                 color:#1c4476;
             }
             textarea{
-                width: 100%;
+                width: 95%;
             }
-            input[type=text]{
-                width:65%;
-            }
+            
             ul{
                 padding: 0;
                 list-style: none;
             }
-            
+            .my-remark-date{
+                 float:right;
+            }
             
             li{
-                height: 100%;
+                padding: 4px;
                 margin-bottom: 14px;
                 background: #f2f5f6; /* Old browsers */
-                background: -moz-linear-gradient(top, #f2f5f6 0%, #e3eaed 37%, #c8d7dc 100%); /* FF3.6+ */
-                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f5f6), color-stop(37%,#e3eaed), color-stop(100%,#c8d7dc)); /* Chrome,Safari4+ */
-                background: -webkit-linear-gradient(top, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* Chrome10+,Safari5.1+ */
-                background: -o-linear-gradient(top, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* Opera 11.10+ */
-                background: -ms-linear-gradient(top, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* IE10+ */
-                background: linear-gradient(top, #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* W3C */
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=0 ); /* IE6-9 */
+                background-image: linear-gradient(bottom, rgb(181,193,255) 100%, rgb(217,237,247) 100%);
+                background-image: -o-linear-gradient(bottom, rgb(181,193,255) 100%, rgb(217,237,247) 100%);
+                background-image: -moz-linear-gradient(bottom, rgb(181,193,255) 100%, rgb(217,237,247) 100%);
+                background-image: -webkit-linear-gradient(bottom, rgb(181,193,255) 100%, rgb(217,237,247) 100%);
+                background-image: -ms-linear-gradient(bottom, rgb(181,193,255) 100%, rgb(217,237,247) 100%);         
+                background-image: -webkit-gradient(
+                    linear,
+                    left bottom,
+                    left top,
+                    color-stop(1, rgb(181,193,255)),
+                    color-stop(1, rgb(217,237,247))
+                    );
             }
 
             .my-button{
@@ -76,22 +81,20 @@
         </style>
     </head>
     <body>
-        <h1>Remarker</h1>
-        <form>
-            remark:<input id="remark-text" type="text" value="" placeholder="insert remark" />
-            <input type="submit" value="post remark"/>
-        </form>
-        <h1>remark list</h1>
+        <h1>Personal Remarker</h1>
+            <textarea rows="4" cols="50" id="remark-text" placeholder="insert remark">  </textarea>
+            <div class="my-button my-button-submit">post remark</div>
+        <h2>remarks</h2>
         <ul>
             
         </ul>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script>
             $(document).ready(function(){
-                $('form').on('submit',function(){ 
+                $('.my-button-submit').on('click',function(){ 
                     var date=new Date();
                     var strDate='posted:'+date.getDay()+'/'+date.getMonth()+'/'+date.getFullYear();
-                    var valElement=$('#remark-text').val();
+                    var valElement=$('#remark-text').text();
                     if(!valElement){return false;}
                     var str='<li>'+
                             '<div class="my-text">'+$('#remark-text').val()+'</div>';

@@ -13,16 +13,25 @@
             }
             h1,h2{
                 color:white;
+                background-color: #03243b;
+                padding-left: 4px;
             }
             ul{
                 padding: 0;
                 list-style: none;
             }
+            .my-text{
+                display: inline-block;
+                width:50%;
+                background-color:#e0f8ff;
+            }
+            
             .my-remark-date{
                  float:right;
             }
             
             li{
+                min-height: 100px;
                 padding: 4px;
                 margin-bottom: 14px;
                background-color: white;
@@ -68,6 +77,9 @@
                 display: none;
                  
             }
+            .my-details{
+                float:right;
+            }
 
         </style>
     </head>
@@ -85,8 +97,9 @@
             $(document).ready(function(){
                 $('.my-button-submit').on('click',function(){ 
                     var date=new Date();
-                    var strDate='posted:'+date.getDay()+'/'+date.getMonth()+'/'+date.getFullYear();
-                    var valElement=$('#remark-text').val();
+                    //var strDate=date.getDay()+'/'+date.getMonth()+'/'+date.getFullYear();
+                   var strDate='';
+                   var valElement=$('#remark-text').val();
                     if(!valElement){return false;}
                     var str='<li>'+
                             '<div class="my-text">'+valElement+'</div>';
@@ -96,23 +109,24 @@
                         });
                     }
                     */
-                    str+='<div class="my-button my-button-edit">edit</div>'+
+                    str+='<div class="my-details"><div class="my-button my-button-edit">edit</div>'+
                          '<div class="my-button my-button-delete">delete</div>'+
                          '<div class="my-button my-button-save">save</div>'+
                          '<div class="my-remark-date">'+strDate+'</div>'+
-                         '</li>';
+                         '</div></li>';
                     $('ul').append(str);
                     return false;
                 });
                 $('.my-button-edit').live('click',function(){
                     $(this).parent().find('.my-button-save').css('display','inline-block');
-                    var myText=$(this).parent().find('.my-text');
+                    var myText=$(this).parent().parent().find('.my-text');
                     myText.html('<textarea>'+myText.html()+'</textarea>');
                     return false;
                 });
                 $('.my-button-save').live('click',function(){
-                    var myText=$(this).parent().find('textarea');
+                    var myText=$(this).parent().parent().find('textarea');
                     myText.parent().html(myText.val());
+                    $(this).hide();
                     return false;
                 });
                 $('.my-button-delete').live('click',function(){

@@ -86,6 +86,7 @@
     <body>
         
         <h1>Personal Remarker</h1>
+        <div class="my-button my-button-clear-all-remarks">remove all remarks</div>
             <textarea rows="4" cols="50" id="remark-text" placeholder="Write your remark..."></textarea>
             <div class="my-button my-button-submit">post remark</div>
         <h2>remarks</h2>
@@ -114,17 +115,24 @@
                     return false;
                 });
                 $('.my-button-delete').live('click',function(){
+                    sessionStorage.remarks=$(sessionStorage.remarks).find($(this).parent().parent().attr('id')).remove();
                     $(this).parent().parent().remove();
+                    return false;
+                });
+                $('.my-button-clear-all-remarks').live('click',function(){
+                    alert('sdsds');
+                    removeAllRemarks();
+                    displayRemarks();
                     return false;
                 });
             });
             function createRemark(){
-                   //var date=new Date();
+                   var date=new Date();
                     //var strDate=date.getDay()+'/'+date.getMonth()+'/'+date.getFullYear();
                    var strDate='';
                    var valElement=$('#remark-text').val();
                     if(!valElement){return false;}
-                    var str='<li>'+
+                    var str='<li id="remark'+date.getMilliseconds()+'">'+
                             '<div class="my-text">'+valElement+'</div>';
                  /**   if(window.navigator){
                         navigator.geolocation.getCurrentPosition(function(position) {   
@@ -146,8 +154,15 @@
                 sessionStorage.remarks+=remarkStr;
                 return sessionStorage.remarks;
             }
+            function removeAllRemarks(){
+               sessionStorage.removeItem("remarks");
+            }
+            
+            function removeRemark(){
+                
+            }
             function displayRemarks(){
-                $('ul').append(sessionStorage.remarks);
+                $('ul').html(sessionStorage.remarks);
             }
         </script>
     </body>

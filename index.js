@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 var MyRemarkController = function(){
     var  myStorage=new MyStorage();
-    this.displayRemarks();
+    MyRemarkController.displayRemarks();
     $('.my-button-submit').on('click',function(){ 
         addRemark(createRemark());
         displayRemarks();

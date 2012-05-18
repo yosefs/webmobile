@@ -3,8 +3,7 @@ $(document).ready(function(){
 });
 
 var MyRemarkController = function(){
-    var  myStorage=new MyStorage();
-    MyRemarkController.displayRemarks();
+    var  myRemarkModel=new MyRemarkModel();
     $('.my-button-submit').on('click',function(){ 
         addRemark(createRemark());
         displayRemarks();
@@ -33,6 +32,14 @@ var MyRemarkController = function(){
         displayRemarks();
         return false;
     });
+}
+
+
+var MyRemarkModel =function(){
+    var  myStorage=new MyStorage();
+    this.displayRemarks = function(){
+        $('ul').html(myStorage.getItems());
+    }
     this.createRemark = function(){
         var date=new Date();
         //var strDate=date.getDay()+'/'+date.getMonth()+'/'+date.getFullYear();
@@ -56,11 +63,8 @@ var MyRemarkController = function(){
         '</div></li>';
         return str;
     }
-    this.displayRemarks = function(){
-        $('ul').html(myStorage.getItems());
-    }
+    
 }
-
 
 var MyStorage = function(mainKey,storageOb){
     if('sessionStorage'!=storageOb || 'localStorage'!=storageOb){

@@ -1,40 +1,39 @@
 $(document).ready(function(){
-    MyRemarkController.init();
+    MyRemarkController();
 });
 
-var MyRemarkController = {
-    init:function(){
+var MyRemarkController = function(){
+    var  myStorage=new MyStorage();
+    this.displayRemarks();
+    $('.my-button-submit').on('click',function(){ 
+        addRemark(createRemark());
         displayRemarks();
-        $('.my-button-submit').on('click',function(){ 
-            addRemark(createRemark());
-            displayRemarks();
-            return false;
-        });
-        $('.my-button-edit').live('click',function(){
-            $(this).parent().find('.my-button-save').css('display','inline-block');
-            var myText=$(this).parent().parent().find('.my-text');
-            myText.html('<textarea>'+myText.html()+'</textarea>');
-            return false;
-        });
-        $('.my-button-save').live('click',function(){
-            var myText=$(this).parent().parent().find('textarea');
-            myText.parent().html(myText.val());
-            $(this).hide();
-            return false;
-        });
-        $('.my-button-delete').live('click',function(){
-            sessionStorage.remarks=$(sessionStorage.remarks).find($(this).parent().parent().attr('id')).remove();
-            $(this).parent().parent().remove();
-            return false;
-        });
-        $('.my-button-clear-all-remarks').live('click',function(){
-            alert('sdsds');
-            removeAllRemarks();
-            displayRemarks();
-            return false;
-        });
-    },
-    createRemark: function(){
+        return false;
+    });
+    $('.my-button-edit').live('click',function(){
+        $(this).parent().find('.my-button-save').css('display','inline-block');
+        var myText=$(this).parent().parent().find('.my-text');
+        myText.html('<textarea>'+myText.html()+'</textarea>');
+        return false;
+    });
+    $('.my-button-save').live('click',function(){
+        var myText=$(this).parent().parent().find('textarea');
+        myText.parent().html(myText.val());
+        $(this).hide();
+        return false;
+    });
+    $('.my-button-delete').live('click',function(){
+        sessionStorage.remarks=$(sessionStorage.remarks).find($(this).parent().parent().attr('id')).remove();
+        $(this).parent().parent().remove();
+        return false;
+    });
+    $('.my-button-clear-all-remarks').live('click',function(){
+        alert('sdsds');
+        removeAllRemarks();
+        displayRemarks();
+        return false;
+    });
+    this.createRemark = function(){
         var date=new Date();
         //var strDate=date.getDay()+'/'+date.getMonth()+'/'+date.getFullYear();
         var strDate='';
@@ -56,9 +55,9 @@ var MyRemarkController = {
         '<div class="my-remark-date">'+strDate+'</div>'+
         '</div></li>';
         return str;
-    },
-    displayRemarks: function(){
-        $('ul').html(MyStorage.getItems());
+    }
+    this.displayRemarks = function(){
+        $('ul').html(myStorage.getItems());
     }
 }
 

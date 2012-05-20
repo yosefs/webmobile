@@ -6,35 +6,33 @@ var MyRemarkController = function(){
     var  myRemarkModel=MyRemarkModel();
     var  myRemarkView=new MyRemarkView();
     myRemarkView.displayRemarks(myRemarkModel.getItems());
+    var myDetails=$('.my-details');
     $('.my-button-submit').on('click',function(){ 
         myRemarkModel.createItem($('#remark-text').val());
         myRemarkView.displayRemarks(myRemarkModel.getItems());
         return false;
     });
-    $('.my-details').on('click','.my-button-edit',function(){
+    myDetails.on('click','.my-button-edit',function(){
         myRemarkView.editRemark($(this).parent());
         return false;
     });
-    $('.my-details').on('click','.my-button-save',function(){
+    myDetails.on('click','.my-button-save',function(){
         var parent=$(this).parent().parent();
         myRemarkModel.updateItem(parent.attr('id'), parent.find('textarea').val());
         myRemarkView.displayRemarks(myRemarkModel.getItems());
         //$(this).hide();
         return false;
     });
-    /**
-    $('.my-button-delete').live('click',function(){
+    myDetails.on('click','.my-button-delete',function(){
         sessionStorage.remarks=$(sessionStorage.remarks).find($(this).parent().parent().attr('id')).remove();
         $(this).parent().parent().remove();
         return false;
     });
-    $('.my-button-clear-all-remarks').live('click',function(){
-        alert('sdsds');
-        removeAllRemarks();
-        displayRemarks();
+    $('.my-button-clear-all-remarks').on('click',function(){
+        myRemarkModel.deleteAllItems();
+        myRemarkView.displayRemarks();
         return false;
     });
-    */
 }
 
 
@@ -91,7 +89,7 @@ var MyItemModel = function(mainKey,storageOb){
         var key='remark'+date.getTime();
         setItem(key, value);
     }
-    this.deleteAll = function(){
+    this.deleteAllItems = function(){
        delete storageOb.mainKey;
     }      
     this.deleteItem = function(key){

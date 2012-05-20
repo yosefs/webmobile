@@ -1,7 +1,6 @@
 $(document).ready(function(){
     MyRemarkController();
 });
-
 var MyRemarkController = function(){
     var  myRemarkModel=MyRemarkModel();
     var  myRemarkView=new MyRemarkView();
@@ -44,9 +43,6 @@ var MyRemarkController = function(){
         return false;
     });
 }
-
-
-
 var MyRemarkView = function(){   
     this.displayRemarks = function(items){
         var res='';
@@ -86,8 +82,6 @@ var MyRemarkView = function(){
 var MyRemarkModel=function(){
      return new MyItemModel('remarks', sessionStorage);    
 }
-
-
 /*implement crud = create, read, update, delete*/
 var MyItemModel = function(mainKey,storageOb){
     var initMainKey='{}';

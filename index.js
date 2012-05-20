@@ -4,11 +4,13 @@ $(document).ready(function(){
 
 var MyRemarkController = function(){
     var  myRemarkModel=new MyRemarkModel();
+    var  myRemarkView=new MyRemarkView();
     $('.my-button-submit').on('click',function(){ 
-        addRemark(createRemark());
-        displayRemarks();
+        myRemarkModel.createRemark(myRemarkView.createRemark());
+        myRemarkView.displayRemarks(myRemarkModel.getItems());
         return false;
     });
+    /**
     $('.my-button-edit').live('click',function(){
         $(this).parent().find('.my-button-save').css('display','inline-block');
         var myText=$(this).parent().parent().find('.my-text');
@@ -32,13 +34,15 @@ var MyRemarkController = function(){
         displayRemarks();
         return false;
     });
+    */
 }
 
 
-var MyRemarkModel =function(){
-    var  myStorage=new MyStorage();
-    this.displayRemarks = function(){
-        $('ul').html(myStorage.getItems());
+
+var MyRemarkView = function(){
+    
+    this.displayRemarks = function(items){
+        $('ul').html(items);
     }
     this.createRemark = function(){
         var date=new Date();
@@ -66,27 +70,34 @@ var MyRemarkModel =function(){
     
 }
 
-var MyStorage = function(mainKey,storageOb){
+
+var MyRemarkModel=function(){
+     this.prototype=new MyItemModel('remarks', sessionStorage);    
+}
+
+
+/*implement crud = create, read, update, delete*/
+var MyItemModel = function(mainKey,storageOb){
     if('sessionStorage'!=storageOb || 'localStorage'!=storageOb){
         return false;
     }
     var storageOb=storageOb;
     storageOb[mainKey]='';
-    this.addItem = function (key,value){
+    this.createItem = function (key,value){
         var itemsOb=JSON.parse(storageOb[mainKey]);
         itemsOb[key]=value;
         storageOb[mainKey]=JSON.stringify(itemsOb);
     }
-    this.removeAllItems = function(){
-        storageOb.removeItem(mainKey);
+    this.deleteAll = function(){
+        storageOb.Item(mainKey);
     }      
-    this.removeItem = function(key){
+    this.deleteItem = function(key){
         var itemsOb=JSON.parse(storageOb[mainKey]);
         delete itemsOb[key];
         storageOb[mainKey]=JSON.stringify(itemsOb);
     }
-    this.editItem = function(key,value){
-        MyItemStorage.addItem(key,value);
+    this.updateItem = function(key,value){
+        MyItemStorage.createItem(key,value);
     }
     this.getItems = function(){
         return storageOb[mainKey];

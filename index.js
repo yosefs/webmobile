@@ -6,7 +6,7 @@ var MyRemarkController = function(){
     var  myRemarkModel=MyRemarkModel();
     var  myRemarkView=new MyRemarkView();
     myRemarkView.displayRemarks(myRemarkModel.getItems());
-    var myDetails=$('.my-details');
+    var myDetails=$('ul');
     $('.my-button-submit').on('click',function(){ 
         myRemarkModel.createItem($('#remark-text').val());
         myRemarkView.displayRemarks(myRemarkModel.getItems());
@@ -90,7 +90,7 @@ var MyItemModel = function(mainKey,storageOb){
         setItem(key, value);
     }
     this.deleteAllItems = function(){
-       delete storageOb.mainKey;
+      storageOb.removeItem(mainKey);
     }      
     this.deleteItem = function(key){
         var itemsOb=JSON.parse(storageOb[mainKey]);

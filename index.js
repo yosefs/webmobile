@@ -24,8 +24,8 @@ var MyRemarkController = function(){
         return false;
     });
     myDetails.on('click','.my-button-delete',function(){
-        sessionStorage.remarks=$(sessionStorage.remarks).find($(this).parent().parent().attr('id')).remove();
-        $(this).parent().parent().remove();
+        myRemarkModel.deleteItem($(this).parent().parent().attr('id'));
+        myRemarkView.displayRemarks(myRemarkModel.getItems());
         return false;
     });
     $('.my-button-clear-all-remarks').on('click',function(){

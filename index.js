@@ -11,17 +11,18 @@ var MyRemarkController = function(){
         myRemarkView.displayRemarks(myRemarkModel.getItems());
         return false;
     });
-    $('my-details').on('click','.my-button-edit',function(){
+    $('.my-details').on('click','.my-button-edit',function(){
         myRemarkView.editRemark($(this).parent());
         return false;
     });
-    /**
-    $('.my-button-save').live('click',function(){
-        var myText=$(this).parent().parent().find('textarea');
-        myText.parent().html(myText.val());
-        $(this).hide();
+    $('.my-details').on('click','.my-button-save',function(){
+        var parent=$(this).parent().parent();
+        myRemarkModel.updateItem(parent.attr('id'), parent.find('textarea').val());
+        myRemarkView.displayRemarks(myRemarkModel.getItems());
+        //$(this).hide();
         return false;
     });
+    /**
     $('.my-button-delete').live('click',function(){
         sessionStorage.remarks=$(sessionStorage.remarks).find($(this).parent().parent().attr('id')).remove();
         $(this).parent().parent().remove();
@@ -52,7 +53,9 @@ var MyRemarkView = function(){
         var myText=remark.parent().find('.my-text');
         myText.html('<textarea>'+myText.html()+'</textarea>');
     }
-    
+    this.saveRemark = function(){
+        
+    }
     var createRemark = function(id,remarkText){
         //var strDate=date.getDay()+'/'+date.getMonth()+'/'+date.getFullYear();
         var strDate='';

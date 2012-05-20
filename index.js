@@ -3,10 +3,10 @@ $(document).ready(function(){
 });
 
 var MyRemarkController = function(){
-    var  myRemarkModel=new MyRemarkModel();
+    var  myRemarkModel=MyRemarkModel();
     var  myRemarkView=new MyRemarkView();
     $('.my-button-submit').on('click',function(){ 
-        myRemarkModel.createRemark(myRemarkView.createRemark());
+        myRemarkModel.createItem($('#remark-text').val());
         myRemarkView.displayRemarks(myRemarkModel.getItems());
         return false;
     });
@@ -39,21 +39,23 @@ var MyRemarkController = function(){
 
 
 
-var MyRemarkView = function(){
-    
+var MyRemarkView = function(){   
     this.displayRemarks = function(items){
-        $('ul').html(items);
+        var res='';
+        var item;
+        for(item in items){    
+            res+=createRemark(item,items[item])
+        }
+        $('ul').html(res);
     }
-    this.createRemark = function(){
-        var date=new Date();
+    var createRemark = function(id,remarkText){
         //var strDate=date.getDay()+'/'+date.getMonth()+'/'+date.getFullYear();
         var strDate='';
-        var valElement=$('#remark-text').val();
-        if(!valElement){
+        if(!remarkText){
             return false;
         }
-        var str='<li id="remark'+date.getMilliseconds()+'">'+
-        '<div class="my-text">'+valElement+'</div>';
+        var str='<li id="'+id+'">'+
+        '<div class="my-text">'+remarkText+'</div>';
         /**   if(window.navigator){
                         navigator.geolocation.getCurrentPosition(function(position) {   
                             str+=' latitude:'+startPos.coords.latitude+' longitude:'+startPos.coords.longitude;
@@ -66,27 +68,20 @@ var MyRemarkView = function(){
         '<div class="my-remark-date">'+strDate+'</div>'+
         '</div></li>';
         return str;
-    }
-    
+    }   
 }
-
-
 var MyRemarkModel=function(){
-     this.prototype=new MyItemModel('remarks', sessionStorage);    
+     return new MyItemModel('remarks', sessionStorage);    
 }
 
 
 /*implement crud = create, read, update, delete*/
 var MyItemModel = function(mainKey,storageOb){
-    if('sessionStorage'!=storageOb || 'localStorage'!=storageOb){
-        return false;
-    }
-    var storageOb=storageOb;
-    storageOb[mainKey]='';
-    this.createItem = function (key,value){
-        var itemsOb=JSON.parse(storageOb[mainKey]);
-        itemsOb[key]=value;
-        storageOb[mainKey]=JSON.stringify(itemsOb);
+    storageOb[mainKey]='{}';
+    this.createItem = function (value){
+        var date=new Date();
+        var key='remark'+date.getTime();
+        setItem(key, value);
     }
     this.deleteAll = function(){
         storageOb.Item(mainKey);
@@ -97,12 +92,24 @@ var MyItemModel = function(mainKey,storageOb){
         storageOb[mainKey]=JSON.stringify(itemsOb);
     }
     this.updateItem = function(key,value){
-        MyItemStorage.createItem(key,value);
+       setItem(key,value)
     }
     this.getItems = function(){
-        return storageOb[mainKey];
+        var items=JSON.parse(storageOb[mainKey]);
+        var res={};
+        var item;
+        for(item in items){
+            res[item]=this.getItem(item);
+        }
+        return res;
     }
     this.getItem = function(key){
         return JSON.stringify(JSON.parse(storageOb[mainKey])[key]);
     }
+    var setItem = function(key,value){
+        var itemsOb=JSON.parse(storageOb[mainKey]);
+        itemsOb[key]=value;
+        storageOb[mainKey]=JSON.stringify(itemsOb);
+    }
+    return this;
 }

@@ -1,0 +1,11 @@
+<widget xmlns="http://www.w3.org/ns/widgets" height="200" width="200">
+  <name short="CoolApp">Remark WebMobile MVC Application - use sessionStorage</name>
+  <description>
+    This is my code application, addon for opera browser - offline web mobile application
+  </description>
+  <author email = "csyosef@gmail.com">
+    Yosef Soiferman
+  </author>
+  <icon src="images/remark-icon.png"/>
+  <content src="index.html"/>
+</widget>

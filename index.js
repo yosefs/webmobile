@@ -83,14 +83,16 @@ var MyRemarkModel=function(){
 
 /*implement crud = create, read, update, delete*/
 var MyItemModel = function(mainKey,storageOb){
-    storageOb[mainKey]=storageOb[mainKey]||'{}';
+    var initMainKey='{}';
+    storageOb[mainKey]=storageOb[mainKey]||initMainKey;
     this.createItem = function (value){
         var date=new Date();
         var key='remark'+date.getTime();
         setItem(key, value);
     }
     this.deleteAllItems = function(){
-      storageOb.removeItem(mainKey);
+     // storageOb.removeItem(mainKey);
+      storageOb[mainKey]=initMainKey;
     }      
     this.deleteItem = function(key){
         var itemsOb=JSON.parse(storageOb[mainKey]);

@@ -5,12 +5,13 @@ $(document).ready(function(){
 var MyRemarkController = function(){
     var  myRemarkModel=MyRemarkModel();
     var  myRemarkView=new MyRemarkView();
+    myRemarkView.displayRemarks(myRemarkModel.getItems());
     $('.my-button-submit').on('click',function(){ 
         myRemarkModel.createItem($('#remark-text').val());
         myRemarkView.displayRemarks(myRemarkModel.getItems());
         return false;
     });
-    $('.my-button-edit').live('click',function(){
+    $('my-details').on('click','.my-button-edit',function(){
         myRemarkView.editRemark($(this).parent());
         return false;
     });
@@ -81,14 +82,14 @@ var MyRemarkModel=function(){
 
 /*implement crud = create, read, update, delete*/
 var MyItemModel = function(mainKey,storageOb){
-    storageOb[mainKey]='{}';
+    storageOb[mainKey]=storageOb[mainKey]||'{}';
     this.createItem = function (value){
         var date=new Date();
         var key='remark'+date.getTime();
         setItem(key, value);
     }
     this.deleteAll = function(){
-        storageOb.Item(mainKey);
+       delete storageOb.mainKey;
     }      
     this.deleteItem = function(key){
         var itemsOb=JSON.parse(storageOb[mainKey]);

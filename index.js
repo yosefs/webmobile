@@ -11,7 +11,7 @@ var MyRemarkController = function(){
         return false;
     });
     $('.my-button-edit').live('click',function(){
-        myRemarkView.editRemark(this);
+        myRemarkView.editRemark($(this).parent());
         return false;
     });
     /**
@@ -47,8 +47,8 @@ var MyRemarkView = function(){
         $('ul').html(res);
     }
     this.editRemark = function(remark){
-        $(remark).parent().find('.my-button-save').css('display','inline-block');
-        var myText=$(remark).parent().parent().find('.my-text');
+        remark.find('.my-button-save').css('display','inline-block');
+        var myText=remark.parent().find('.my-text');
         myText.html('<textarea>'+myText.html()+'</textarea>');
     }
     

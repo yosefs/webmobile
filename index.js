@@ -8,7 +8,12 @@ var MyRemarkController = function(){
     myRemarkView.displayRemarks(myRemarkModel.getItems());
     var myDetails=$('ul');
     $('.my-button-submit').on('click',function(){ 
-        myRemarkModel.createItem($('#remark-text').val());
+        var value=$.trim($('#remark-text').val());
+        if(!value){
+            alert('please fill data');
+            return false;
+        }
+        myRemarkModel.createItem(value);
         myRemarkView.displayRemarks(myRemarkModel.getItems());
         return false;
     });
@@ -18,7 +23,12 @@ var MyRemarkController = function(){
     });
     myDetails.on('click','.my-button-save',function(){
         var parent=$(this).parent().parent();
-        myRemarkModel.updateItem(parent.attr('id'), parent.find('textarea').val());
+        var value=$.trim(parent.find('textarea').val());
+        if(!value){
+            alert('please fill data');
+            return false;
+        }
+        myRemarkModel.updateItem(parent.attr('id'), value);
         myRemarkView.displayRemarks(myRemarkModel.getItems());
         //$(this).hide();
         return false;
@@ -50,9 +60,6 @@ var MyRemarkView = function(){
         remark.find('.my-button-save').css('display','inline-block');
         var myText=remark.parent().find('.my-text');
         myText.html('<textarea>'+myText.html()+'</textarea>');
-    }
-    this.saveRemark = function(){
-        
     }
     var createRemark = function(id,remarkText){
         //var strDate=date.getDay()+'/'+date.getMonth()+'/'+date.getFullYear();
@@ -112,7 +119,7 @@ var MyItemModel = function(mainKey,storageOb){
         return res;
     }
     this.getItem = function(key){
-        return JSON.stringify(JSON.parse(storageOb[mainKey])[key]);
+        return JSON.parse(storageOb[mainKey])[key];
     }
     var setItem = function(key,value){
         var itemsOb=JSON.parse(storageOb[mainKey]);

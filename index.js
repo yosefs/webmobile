@@ -3,6 +3,7 @@ $(document).ready(function(){
 });
 var MyRemarkController = function(){
     var  myRemarkModel=MyRemarkModel();
+    if(!myRemarkModel){return false;}
     var  myRemarkView=new MyRemarkView();
     myRemarkView.displayRemarks(myRemarkModel.getItems());
     var myDetails=$('ul');
@@ -80,7 +81,11 @@ var MyRemarkView = function(){
     }   
 }
 var MyRemarkModel=function(){
-     return new MyItemModel('remarks', sessionStorage);    
+    if(!sessionStorage){
+        alert('your device not support this application');
+        return false;
+    }
+    return new MyItemModel('remarks', sessionStorage);    
 }
 /*implement crud = create, read, update, delete*/
 var MyItemModel = function(mainKey,storageOb){

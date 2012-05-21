@@ -28,6 +28,7 @@ var MyRemarkController = function(){
             alert('please fill data');
             return false;
         }
+        parent.find('.my-button-edit').css('display','inline-block');
         myRemarkModel.updateItem(parent.attr('id'), value);
         myRemarkView.displayRemarks(myRemarkModel.getItems());
         //$(this).hide();
@@ -55,6 +56,7 @@ var MyRemarkView = function(){
     }
     this.editRemark = function(remark){
         remark.find('.my-button-save').css('display','inline-block');
+        remark.find('.my-button-edit').css('display','none');
         var myText=remark.parent().find('.my-text');
         myText.html('<textarea>'+myText.html()+'</textarea>');
     }
@@ -85,7 +87,7 @@ var MyRemarkModel=function(){
         alert('your device not support this application');
         return false;
     }
-    return new MyItemModel('remarks', sessionStorage);    
+  return this.prototype=new MyItemModel('remarks', sessionStorage);    
 }
 /*implement crud = create, read, update, delete*/
 var MyItemModel = function(mainKey,storageOb){

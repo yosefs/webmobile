@@ -3,7 +3,9 @@ $(document).ready(function(){
 });
 var MyRemarkController = function(){
     var  myRemarkModel=MyRemarkModel();
-    if(!myRemarkModel){return false;}
+    if(!myRemarkModel){
+        return false;
+    }
     var  myRemarkView=new MyRemarkView();
     myRemarkView.displayRemarks(myRemarkModel.getItems());
     var myDetails=$('ul');
@@ -76,7 +78,7 @@ var MyRemarkView = function(){
                     */
         str+='<div class="my-details"><div class="my-button my-button-style1 my-button-edit">edit</div>'+
         '<div class="my-button my-button-style1 my-button-save">save</div>'+
-         '<div class="my-button my-button-style2 my-button-delete">delete</div>'+
+        '<div class="my-button my-button-style2 my-button-delete">delete</div>'+
         '<div class="my-remark-date">'+strDate+'</div>'+
         '</div></li>';
         return str;
@@ -87,7 +89,7 @@ var MyRemarkModel=function(){
         alert('your device not support this application');
         return false;
     }
-  return new MyItemModel('remarks', sessionStorage);    
+    return new MyItemModel('remarks', sessionStorage);    
 }
 /*implement crud = create, read, update, delete*/
 var MyItemModel = function(mainKey,storageOb){
@@ -99,8 +101,8 @@ var MyItemModel = function(mainKey,storageOb){
         setItem(key, value);
     }
     this.deleteAllItems = function(){
-     // storageOb.removeItem(mainKey);
-      storageOb[mainKey]=initMainKey;
+        // storageOb.removeItem(mainKey);
+        storageOb[mainKey]=initMainKey;
     }      
     this.deleteItem = function(key){
         var itemsOb=JSON.parse(storageOb[mainKey]);
@@ -108,7 +110,7 @@ var MyItemModel = function(mainKey,storageOb){
         storageOb[mainKey]=JSON.stringify(itemsOb);
     }
     this.updateItem = function(key,value){
-       setItem(key,value)
+        setItem(key,value)
     }
     this.getItems = function(){
         var items=JSON.parse(storageOb[mainKey]);

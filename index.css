@@ -1,6 +1,9 @@
 body{
-    color:#1c4476;
-    background-color: #032e3b;
+   color:#1c4476;
+}
+body,div,h1,h2,textarea{
+   margin:0;
+   padding: 0;
 }
 textarea{
     width:100%;
@@ -11,19 +14,19 @@ textarea{
 }
 h1{
     text-align: center;
+     line-height: 180%;
+    background-color: #032e3b;
     color: #ffffff;
     text-shadow:0px 0px 0 rgb(203,203,203),1px -1px 0 rgb(160,160,160),2px -2px 0 rgb(118,118,118),3px -3px 0 rgb(75,75,75),4px -4px 0 rgb(33,33,33),5px -5px 0 rgb(-10,-10,-10), 6px -6px 0 rgb(-52,-52,-52),7px -7px 6px rgba(0,0,0,0.6),7px -7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
 }
-.my-header-style1{
-    color:white;
-    background-color: #03243b;
-    font-family: Arial, sans-serif;
-}
 
 #my-remarks-header-wrapper{
-    color:white;
+    border-style: solid;
+    border-right-width:0px;
+    border-left-width:0px;
+    border-top-width:0px;
+    border-bottom-width:1px;
     padding-left: 4px;
-    background-color: #03243b;
 }
 
 .my-button-clear-all-remarks{
@@ -46,7 +49,6 @@ ul.my-remark-list{
 
 li{
     min-height: 100px;
-    padding: 4px;
     margin-bottom: 14px;
     background-color: white;
 }
@@ -61,9 +63,6 @@ li{
 
 .my-button-submit{
     float:right;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #03243B;
 }
 .my-create-remark{
     margin-bottom: 65px;

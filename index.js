@@ -68,8 +68,8 @@ var MyRemarkView = function(){
         if(!remarkText){
             return false;
         }
-        var str='<li id="'+id+'">'+
-        '<div class="my-text">'+remarkText+'</div>';
+        var str='<li id="'+id+'">';
+        
         /**   if(window.navigator){
                         navigator.geolocation.getCurrentPosition(function(position) {   
                             str+=' latitude:'+startPos.coords.latitude+' longitude:'+startPos.coords.longitude;
@@ -80,7 +80,7 @@ var MyRemarkView = function(){
         '<div class="my-button my-button-style1 my-button-save">save</div>'+
         '<div class="my-button my-button-style2 my-button-delete">delete</div>'+
         '<div class="my-remark-date">'+strDate+'</div>'+
-        '</div></li>';
+        '</div><div class="my-text">'+remarkText+'</div></li>';
         return str;
     }   
 }

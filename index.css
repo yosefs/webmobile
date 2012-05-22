@@ -48,6 +48,7 @@ ul.my-remark-list{
 }
 .my-text{
     overflow: auto;
+    word-wrap:break-word;
 }
 
 .my-remark-date{

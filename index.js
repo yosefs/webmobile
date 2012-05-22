@@ -75,8 +75,8 @@ var MyRemarkView = function(){
                     }
                     */
         str+='<div class="my-details"><div class="my-button my-button-style1 my-button-edit">edit</div>'+
-        '<div class="my-button my-button-style1 my-button-delete">delete</div>'+
         '<div class="my-button my-button-style1 my-button-save">save</div>'+
+         '<div class="my-button my-button-style2 my-button-delete">delete</div>'+
         '<div class="my-remark-date">'+strDate+'</div>'+
         '</div></li>';
         return str;

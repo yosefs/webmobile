@@ -87,7 +87,7 @@ var MyRemarkModel=function(){
         alert('your device not support this application');
         return false;
     }
-  return this.prototype=new MyItemModel('remarks', sessionStorage);    
+  return new MyItemModel('remarks', sessionStorage);    
 }
 /*implement crud = create, read, update, delete*/
 var MyItemModel = function(mainKey,storageOb){

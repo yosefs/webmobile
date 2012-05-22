@@ -32,7 +32,7 @@ h1{
     border-right-width:0px;
     border-left-width:0px;
     border-top-width:0px;
-    border-bottom-width:1px;
+    border-bottom-width:2px;
 }
 
 .my-button-clear-all-remarks{
@@ -57,6 +57,11 @@ li{
     min-height: 100px;
     margin-bottom: 14px;
     background-color: white;
+    border-style: solid;
+    border-right-width:0px;
+    border-left-width:0px;
+    border-top-width:0px;
+    border-bottom-width:1px;
 }
 
 #content{

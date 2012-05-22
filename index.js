@@ -8,7 +8,7 @@ var MyRemarkController = function(){
     }
     var  myRemarkView=new MyRemarkView();
     myRemarkView.displayRemarks(myRemarkModel.getItems());
-    var myDetails=$('ul');
+    var myDetails=$('.my-remark-list');
     $('.my-button-submit').on('click',function(){ 
         var value=$.trim($('#remark-text').val());
         if(!value){
@@ -54,7 +54,7 @@ var MyRemarkView = function(){
         for(item in items){    
             res+=createRemark(item,items[item])
         }
-        $('ul').html(res);
+        $('.my-remark-list').html(res);
     }
     this.editRemark = function(remark){
         remark.find('.my-button-save').css('display','inline-block');

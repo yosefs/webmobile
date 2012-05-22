@@ -1,9 +1,10 @@
 body{
-   color:#1c4476;
+    color:#1c4476;
 }
 body,div,h1,h2,textarea{
-   margin:0;
-   padding: 0;
+    margin:0;
+    padding: 0;
+    border:0;
 }
 textarea{
     width:100%;
@@ -12,9 +13,15 @@ textarea{
     -moz-box-sizing: border-box;
     -ms-box-sizing: border-box;
 }
+#remark-text{
+    border-style: solid;
+    border-width:1px;
+
+}
 h1{
+    margin-bottom:4px;
     text-align: center;
-     line-height: 180%;
+    line-height: 180%;
     background-color: #032e3b;
     color: #ffffff;
     text-shadow:0px 0px 0 rgb(203,203,203),1px -1px 0 rgb(160,160,160),2px -2px 0 rgb(118,118,118),3px -3px 0 rgb(75,75,75),4px -4px 0 rgb(33,33,33),5px -5px 0 rgb(-10,-10,-10), 6px -6px 0 rgb(-52,-52,-52),7px -7px 6px rgba(0,0,0,0.6),7px -7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
@@ -26,7 +33,6 @@ h1{
     border-left-width:0px;
     border-top-width:0px;
     border-bottom-width:1px;
-    padding-left: 4px;
 }
 
 .my-button-clear-all-remarks{
@@ -51,6 +57,11 @@ li{
     min-height: 100px;
     margin-bottom: 14px;
     background-color: white;
+}
+
+#content{
+    padding-right: 8px;
+    padding-left: 8px;
 }
 
 .my-button{
@@ -85,8 +96,6 @@ li{
         color-stop(0.69, rgb(52,162,235))
         );
 }
-
-
 .my-button-style2{
     color:white;
     background-image: linear-gradient(bottom, rgb(176,38,14) 37%, rgb(235,87,50) 69%);
@@ -102,8 +111,6 @@ li{
         color-stop(0.37, rgb(176,38,14)),
         color-stop(0.69, rgb(235,87,50))
         );
-
-
 }
 .my-button-save{
     display: none;

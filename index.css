@@ -46,10 +46,8 @@ ul.my-remark-list{
     list-style: none;
 }
 .my-text{
-    display: inline-block;
-    width:50%;
     background-color:#e0f8ff;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .my-remark-date{

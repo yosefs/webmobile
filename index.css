@@ -34,11 +34,13 @@ li{
 .my-button{
     display: inline-block;
     margin-left: 2px;
-
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
-    color: #ffffff;
     padding: 6px 16px;
+}
+
+.my-button-style1{
+    color: #ffffff;
     background: -moz-linear-gradient(
         top,
         #8fadc4 0%,
@@ -61,7 +63,6 @@ li{
     text-shadow:
         0px -1px 0px rgba(15,49,150,1),
         0px 1px 0px rgba(255,255,255,0.2);
-
 }
 
 .my-button-save{

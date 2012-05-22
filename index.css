@@ -33,7 +33,7 @@ h1{
     border-left-width:0px;
     border-top-width:0px;
     border-bottom-width:2px;
-    padding-bottom: 4px;
+    padding-bottom: 4px
 }
 
 .my-button-clear-all-remarks{
@@ -55,7 +55,7 @@ ul.my-remark-list{
 }
 
 li{
-    min-height: 100px;
+    min-height: 40px;
     margin-bottom: 14px;
     background-color: white;
     border-style: solid;

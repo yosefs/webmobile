@@ -18,7 +18,7 @@ textarea{
     border-color: #d3e2f3;
 }
 @media screen and (max-width: 600px) {
-    textarea{
+    #remark-text{
         width:auto;
     }
 }

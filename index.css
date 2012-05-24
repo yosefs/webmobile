@@ -7,7 +7,7 @@ body,div,h1,h2,textarea{
     border:0;
 }
 textarea{
-    width:100%;
+    width:auto;
     box-sizing: border-box;
     -webkit-box-sizing:border-box;
     -moz-box-sizing: border-box;
@@ -17,12 +17,6 @@ textarea{
     border-width:2px;
     border-color: #d3e2f3;
 }
-@media screen and (max-width: 600px) {
-    #remark-text{
-        width:auto;
-    }
-}
-
 #remark-text{
     padding-right: 138px;
 }

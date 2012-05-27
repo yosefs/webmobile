@@ -7,7 +7,7 @@ body,div,h1,h2,textarea{
     border:0;
 }
 textarea{
-    width:auto;
+    width:100%;
     box-sizing: border-box;
     -webkit-box-sizing:border-box;
     -moz-box-sizing: border-box;
@@ -18,7 +18,9 @@ textarea{
     border-color: #d3e2f3;
 }
 #remark-text{
-    padding-right: 138px;
+    font-size: 14px;
+    min-height: 100px;
+    line-height: 19px;
 }
 h1{
     margin-bottom:4px;

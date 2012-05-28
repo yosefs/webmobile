@@ -1,8 +1,58 @@
 $(document).ready(function(){
     MyRemarkController();
 });
+
+/*implement crud = create, read, update, delete*/
+var MyItemModel = function(mainKey,storageOb){
+    var initMainKey='{}';
+    storageOb[mainKey]=storageOb[mainKey]||initMainKey;
+    this.createItem = function (value){
+        var date=new Date();
+        var key='remark'+date.getTime();
+        setItem(key, value);
+    }
+    this.deleteAllItems = function(){
+        // storageOb.removeItem(mainKey);
+        storageOb[mainKey]=initMainKey;
+    }      
+    this.deleteItem = function(key){
+        var itemsOb=JSON.parse(storageOb[mainKey]);
+        delete itemsOb[key];
+        storageOb[mainKey]=JSON.stringify(itemsOb);
+    }
+    this.updateItem = function(key,value){
+        setItem(key,value)
+    }
+    this.getItems = function(){
+        var items=JSON.parse(storageOb[mainKey]);
+        var res={};
+        var item;
+        for(item in items){
+            res[item]=this.getItem(item);
+        }
+        return res;
+    }
+    this.getItem = function(key){
+        return JSON.parse(storageOb[mainKey])[key];
+    }
+    var setItem = function(key,value){
+        var itemsOb=JSON.parse(storageOb[mainKey]);
+        itemsOb[key]=value;
+        storageOb[mainKey]=JSON.stringify(itemsOb);
+    }
+    return this;
+}
+var MyRemarkModel=function(){}
+if(sessionStorage){
+    MyRemarkModel.prototype = new MyItemModel('remarks', sessionStorage);  
+}
+else{
+    alert('your device not support this application');
+    MyRemarkModel=false;
+}
+
 var MyRemarkController = function(){
-    var  myRemarkModel=MyRemarkModel();
+    var  myRemarkModel=new MyRemarkModel();
     if(!myRemarkModel){
         return false;
     }
@@ -83,51 +133,4 @@ var MyRemarkView = function(){
         '</div><div class="my-text">'+remarkText+'</div></li>';
         return str;
     }   
-}
-var MyRemarkModel=function(){
-    if(!sessionStorage){
-        alert('your device not support this application');
-        return false;
-    }
-    return new MyItemModel('remarks', sessionStorage);    
-}
-/*implement crud = create, read, update, delete*/
-var MyItemModel = function(mainKey,storageOb){
-    var initMainKey='{}';
-    storageOb[mainKey]=storageOb[mainKey]||initMainKey;
-    this.createItem = function (value){
-        var date=new Date();
-        var key='remark'+date.getTime();
-        setItem(key, value);
-    }
-    this.deleteAllItems = function(){
-        // storageOb.removeItem(mainKey);
-        storageOb[mainKey]=initMainKey;
-    }      
-    this.deleteItem = function(key){
-        var itemsOb=JSON.parse(storageOb[mainKey]);
-        delete itemsOb[key];
-        storageOb[mainKey]=JSON.stringify(itemsOb);
-    }
-    this.updateItem = function(key,value){
-        setItem(key,value)
-    }
-    this.getItems = function(){
-        var items=JSON.parse(storageOb[mainKey]);
-        var res={};
-        var item;
-        for(item in items){
-            res[item]=this.getItem(item);
-        }
-        return res;
-    }
-    this.getItem = function(key){
-        return JSON.parse(storageOb[mainKey])[key];
-    }
-    var setItem = function(key,value){
-        var itemsOb=JSON.parse(storageOb[mainKey]);
-        itemsOb[key]=value;
-        storageOb[mainKey]=JSON.stringify(itemsOb);
-    }
-    return this;
 }

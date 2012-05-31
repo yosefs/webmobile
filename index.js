@@ -4,6 +4,7 @@ $(document).ready(function(){
 
 /*implement crud = create, read, update, delete*/
 var MyItemModel = function(mainKey,storageOb){
+    //private methods + var
     var initMainKey='{}';
     storageOb[mainKey]=storageOb[mainKey]||initMainKey;
     var setItem = function(key,value){
@@ -11,6 +12,7 @@ var MyItemModel = function(mainKey,storageOb){
         itemsOb[key]=value;
         storageOb[mainKey]=JSON.stringify(itemsOb);
     }
+    //public  methods + vars
     return{
         createItem:function (value){
             var date=new Date();
@@ -99,6 +101,7 @@ var MyRemarkController = function(){
     });
 }
 var MyRemarkView = function(){   
+    //private methods +vars
     var createRemark = function(id,remarkText){
         //var strDate=date.getDay()+'/'+date.getMonth()+'/'+date.getFullYear();
         var strDate='';
@@ -120,6 +123,7 @@ var MyRemarkView = function(){
         '</div><div class="my-text">'+remarkText+'</div></li>';
         return str;
     } 
+    //public methods +vars
     return {
         displayRemarks: function(items){
             var res='';

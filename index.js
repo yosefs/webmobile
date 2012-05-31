@@ -6,41 +6,42 @@ $(document).ready(function(){
 var MyItemModel = function(mainKey,storageOb){
     var initMainKey='{}';
     storageOb[mainKey]=storageOb[mainKey]||initMainKey;
-    this.createItem = function (value){
-        var date=new Date();
-        var key='remark'+date.getTime();
-        setItem(key, value);
-    }
-    this.deleteAllItems = function(){
-        // storageOb.removeItem(mainKey);
-        storageOb[mainKey]=initMainKey;
-    }      
-    this.deleteItem = function(key){
-        var itemsOb=JSON.parse(storageOb[mainKey]);
-        delete itemsOb[key];
-        storageOb[mainKey]=JSON.stringify(itemsOb);
-    }
-    this.updateItem = function(key,value){
-        setItem(key,value)
-    }
-    this.getItems = function(){
-        var items=JSON.parse(storageOb[mainKey]);
-        var res={};
-        var item;
-        for(item in items){
-            res[item]=this.getItem(item);
-        }
-        return res;
-    }
-    this.getItem = function(key){
-        return JSON.parse(storageOb[mainKey])[key];
-    }
     var setItem = function(key,value){
         var itemsOb=JSON.parse(storageOb[mainKey]);
         itemsOb[key]=value;
         storageOb[mainKey]=JSON.stringify(itemsOb);
     }
-    return this;
+    return{
+        createItem:function (value){
+            var date=new Date();
+            var key='remark'+date.getTime();
+            setItem(key, value);
+        },
+        deleteAllItems:function(){
+            // storageOb.removeItem(mainKey);
+            storageOb[mainKey]=initMainKey;
+        },      
+        deleteItem:function(key){
+            var itemsOb=JSON.parse(storageOb[mainKey]);
+            delete itemsOb[key];
+            storageOb[mainKey]=JSON.stringify(itemsOb);
+        },
+        updateItem:function(key,value){
+            setItem(key,value)
+        },
+        getItems:function(){
+            var items=JSON.parse(storageOb[mainKey]);
+            var res={};
+            var item;
+            for(item in items){
+                res[item]=this.getItem(item);
+            }
+            return res;
+        },
+        getItem:function(key){
+            return JSON.parse(storageOb[mainKey])[key];
+        }
+    };
 }
 var MyRemarkModel=function(){}
 if(sessionStorage){
@@ -98,20 +99,6 @@ var MyRemarkController = function(){
     });
 }
 var MyRemarkView = function(){   
-    this.displayRemarks = function(items){
-        var res='';
-        var item;
-        for(item in items){    
-            res+=createRemark(item,items[item])
-        }
-        $('.my-remark-list').html(res);
-    }
-    this.editRemark = function(remark){
-        remark.find('.my-button-save').css('display','inline-block');
-        remark.find('.my-button-edit').css('display','none');
-        var myText=remark.parent().find('.my-text');
-        myText.html('<textarea>'+myText.html()+'</textarea>');
-    }
     var createRemark = function(id,remarkText){
         //var strDate=date.getDay()+'/'+date.getMonth()+'/'+date.getFullYear();
         var strDate='';
@@ -132,5 +119,21 @@ var MyRemarkView = function(){
         '<div class="my-remark-date">'+strDate+'</div>'+
         '</div><div class="my-text">'+remarkText+'</div></li>';
         return str;
-    }   
+    } 
+    return {
+        displayRemarks: function(items){
+            var res='';
+            var item;
+            for(item in items){    
+                res+=createRemark(item,items[item])
+            }
+            $('.my-remark-list').html(res);
+        },
+        editRemark: function(remark){
+            remark.find('.my-button-save').css('display','inline-block');
+            remark.find('.my-button-edit').css('display','none');
+            var myText=remark.parent().find('.my-text');
+            myText.html('<textarea>'+myText.html()+'</textarea>');
+        }
+    };
 }

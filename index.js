@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    MyRemarkController();
+  var myRemarkController=new MyRemarkController();
 });
 
 /*implement crud = create, read, update, delete*/
@@ -48,6 +48,7 @@ var MyItemModel = function(mainKey,storageOb){
 var MyRemarkModel=function(){}
 if(sessionStorage){
     MyRemarkModel.prototype = new MyItemModel('remarks', sessionStorage);  
+    MyRemarkModel.prototype.constructor=MyItemModel;
 }
 else{
     alert('your device not support this application');
